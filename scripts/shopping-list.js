@@ -144,7 +144,28 @@ const shoppingList = (function(){
       setSearchTerm(val);
       render();
     });
+
+
   }
+  
+  function findById(id){
+    return store.items.find(item => item.id === id);
+  
+  }
+  function findChecked(id){
+    const item = findById(id);
+    item.checked = !item.checked;
+  }
+  function handleFindChecked(){
+    $('.js-uncheck-all').on('click', event =>{
+      event.preventDefault();
+      const id = store.items;
+      findChecked(id);
+      render();
+    });
+  }
+  
+
   
   function bindEventListeners() {
     handleNewItemSubmit();
@@ -153,6 +174,7 @@ const shoppingList = (function(){
     handleEditShoppingItemSubmit();
     handleToggleFilterClick();
     handleShoppingListSearch();
+    handleFindChecked();
   }
 
   // This object contains the only exposed methods from this module:
